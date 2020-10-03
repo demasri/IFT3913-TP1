@@ -41,10 +41,10 @@ public class FileManager {
         //extract every line of every File
         for (var i=0; i<classes.length; i++) 
         {
-            try {
+            try { 
+                //on utilise le module 'Files' pour extraire les lignes en une seule fois
                 List<String> allLines = Files.readAllLines(
                     Paths.get(classes[i].getAbsolutePath()));
-                    System.out.println(allLines);
                 //convert List of lines to ArrayList for convenience
                 ArrayList<String> allLinesArrayList = new ArrayList<String>(allLines);
                 //add to the @return array
@@ -79,7 +79,6 @@ public class FileManager {
         for (var i=0; i<classes.length; i++)
         {
             classNames[i] = classes[i].getName();
-            System.out.println(classNames[i]);
         } 
 
         return classNames;
@@ -94,12 +93,13 @@ public class FileManager {
      */
     private File[] listFiles(String startDir) 
     {
-        File[] files = null;
 
+        //first we extract the files without looking at them
+        File[] files = null;
         try {
             //extracts files from up to 20 inner folders
             files = Files.walk(Paths.get(startDir), 20)
-            .filter(Files::isRegularFile)
+            .filter(Files::isRegularFile) //no filter
             .map(Path::toFile)
             .toArray(File[]::new);
 
@@ -108,12 +108,12 @@ public class FileManager {
             System.exit(1);
         }
     
-        //extraction of files .java 
+        //then extraction of files .java 
         File[] javaFiles = new File[files.length];
         int counter = 0;
         for (var i=0; i<files.length; i++)
         {
-            if (files[i].getName().endsWith(".txt")) {
+            if (files[i].getName().endsWith(".java")) {
                 javaFiles[counter] = files[i];
                 counter++;
             }
@@ -121,16 +121,19 @@ public class FileManager {
         return javaFiles;
         
     }
-    
-    public static void main(String[] args) 
-    {
-        System.out.println(args[0]);
+
+    public static void main(String[] args) {
         FileManager test = new FileManager(args[0]);
-        test.getClassNamesArray();
+        String[][] classes = test.getClassesArray();
+
+        for (var i=0; i < classes.length; i++) {
+            for (var j=0; j < 20; j++) {
+                if(classes[i][j].isEmpty()) System.out.println("empty line");
+                else System.out.println(classes[i][j] + "\n");
+            }
+        }
     }
+
     
-
-
-
 }
     
