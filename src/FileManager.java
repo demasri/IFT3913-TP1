@@ -27,7 +27,7 @@ public class FileManager {
     /**
      * Sends to CodeAnalyzer every line of every .java file in the attribute 
      * folder
-     * @return 2D Strings array
+     * @return 2D Strings array that contains the line arrays of every class 
      * 
      * SOURCE: https://stackabuse.com/java-list-files-in-a-directory/
      */
@@ -82,14 +82,27 @@ public class FileManager {
         } 
 
         return classNames;
-        
+    }
+
+    /**
+     * Renvoie tous les chemins absolus des files .java dans le folder
+     * @return array de Strings
+     */
+    public String[] getAbsolutePaths() 
+    {
+        File[] files = listFiles(this.path);
+
+        String[] paths = new String[files.length];
+        for (var i=0; i < files.length; i++) {
+            paths[i] = files[i].getAbsolutePath();
+        }
+
+        return paths;
     }
 
     /**
      * Searches the folder  
      * @param startDir folder
-     * 
-     * SOURCE: https://stackabuse.com/java-list-files-in-a-directory/
      */
     private File[] listFiles(String startDir) 
     {
