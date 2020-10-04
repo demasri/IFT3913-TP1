@@ -61,6 +61,7 @@ public class CodeAnalyzer
      */
     public void getMethodes()
     {
+        //on parcourt l'attribut this.classes
         for (var i=0; i < this.classes.length; i++){
             for (var j=0; j < this.classes[i].length; j++) 
             {
@@ -165,6 +166,8 @@ public class CodeAnalyzer
 
 
 
+
+
     /**
      * Calcule le nombre de lignes de code non-vides dans une classe
      * @param allLines les lignes de la classe
@@ -254,12 +257,13 @@ public class CodeAnalyzer
         return ((float) cloc / loc);
     }
 
+
+
+
     public static void main(String[] args) 
     {
         String folderToAnalyze = args[0];
         CodeAnalyzer analyzer = new CodeAnalyzer(folderToAnalyze);
-        analyzer.produceCSV(true);
-        analyzer.produceCSV(false);
         
     }
 
