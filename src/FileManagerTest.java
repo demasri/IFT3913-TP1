@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class FileManagerTest {
 	
 	// Private Fields
-	private FileManager fileManager;
+	private FileManager manager;
 	
 	/***
 	 * Initialising Method for the Test Cases
@@ -14,62 +14,73 @@ class FileManagerTest {
 	@Before
 	public void initTest() 
 	{
-		fileManager = new FileManager("/home/daniel/Desktop/University/AUT20/IFT3913/IFT3913-TP1/src/files_to_analyze/");
+		manager = new FileManager("files_to_analyze");
 	}
 	
 	// Test Case Methods
 
 	/***
-	 * Test Method 1 : 
+	 * Test Method 1 : Test method for getClassesArray should be functional
 	 */
 	@Test
 	void getClassesArray_ShouldBeSuccessful() 
 	{
 		// Arrange
-		int expectedNumberOfClasses =  0;
+		int expectedNumberOfClasses =  9;
 		
 		// Act
+		String[][] testClassesArray = manager.getClassesArray();
 		
 		// Assert
+		assertEquals(testClassesArray.length, expectedNumberOfClasses);
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 2 : Test method for getClassesArray should not be functional
 	 */
 	@Test
 	void getClassesArray_ShouldNotBeSuccessful() 
 	{
 		// Arrange
+		int expectedNumberOfClasses =  5;
 		
 		// Act
+		String[][] testClassesArray = manager.getClassesArray();
 		
 		// Assert
+		assertEquals(testClassesArray.length, expectedNumberOfClasses);
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 3 : Test method for getClassNameArray should be functional
 	 */
 	@Test
 	void getClassNamesArray_ShouldBeSuccessful() 
 	{
 		// Arrange
+		String[] expectedClassNameArray = {"CodeAnalyzer.java", "Member.java", "DataBase.java", "Interface.java", "personne.java", "Rapport.java", "Service.java", "Tests.java", "Vues.java"};
 		
 		// Act
+		String[] actualClassNameArray = manager.getClassNamesArray();
 		
 		// Assert
+		assertTrue(actualClassNameArray.equals(expectedClassNameArray));
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 4 : Test method for getClassNameArray but should return a fail 
 	 */
 	@Test
 	void getClassNamesArray_ShouldNotBeSuccessful() 
 	{
 		// Arrange
+		String[] expectedClassNameArray = {"DataBase.java", "Interface.java", "personne.java", "Rapport.java", "Service.java", "Tests.java", "Vues.java"};
 		
 		// Act
+		String[] actualClassNameArray = manager.getClassNamesArray();
 		
 		// Assert
+		assertFalse(actualClassNameArray.equals(expectedClassNameArray));
 	}
 
 }
