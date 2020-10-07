@@ -173,7 +173,7 @@ public class CodeAnalyzer
      * @param allLines les lignes de la classe
      * @return 
      */
-    private int classe_LOC(String[] allLines)
+    public int classe_LOC(String[] allLines)
     {
         int counter = 0;
 
@@ -192,7 +192,7 @@ public class CodeAnalyzer
      * @param allLines les lignes de la methode
      * @return
      */
-    private int methode_LOC(String[] allLines)
+    public int methode_LOC(String[] allLines)
     {
         return classe_LOC(allLines);
     }
@@ -202,7 +202,7 @@ public class CodeAnalyzer
      * @param allLines
      * @return
      */
-    private int classe_CLOC(String[] allLines)
+    public int classe_CLOC(String[] allLines)
     {
         int counter = 0;
 
@@ -228,7 +228,7 @@ public class CodeAnalyzer
      * @param allLines
      * @return
      */
-    private int methode_CLOC(String[] allLines)
+    public int methode_CLOC(String[] allLines)
     {
         return classe_CLOC(allLines);
     }
@@ -238,7 +238,7 @@ public class CodeAnalyzer
      * @param alLines
      * @return
      */
-    private float classe_DC(String[] allLines)
+    public float classe_DC(String[] allLines)
     {
         int cloc = classe_CLOC(allLines);
         int loc  = classe_LOC(allLines);
@@ -250,7 +250,7 @@ public class CodeAnalyzer
      * @param alLines
      * @return float car valeur non-entiere (pourcentage)
      */
-    private float methode_DC(String[] allLines)
+    public float methode_DC(String[] allLines)
     {
         int cloc = methode_CLOC(allLines);
         int loc  = methode_LOC(allLines);
