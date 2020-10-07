@@ -23,30 +23,9 @@ class CodeAnalyzerTest {
 
 	// Test Methods:
 	
-
-	/***
-	 * Test Method 1 : 
-	 */
-	@Test
-	void getMethodes_ShouldBeSuccessful() {
-		// Arrange
-		
-		// Act
-		
-		// Assert
-		fail("Not yet implemented");
-	}
 	
 	/***
-	 * Test Method 1 : 
-	 */
-	@Test
-	void getMethodes_ShouldNotBeSuccessful() {
-		fail("Not yet implemented");
-	}
-	
-	/***
-	 * Test Method 1 : 
+	 * Test Method 1 : test method for methodes_LOC that should be successful
 	 */
 	@Test
 	void methodes_LOC_ShouldBeSuccessful() {
@@ -62,7 +41,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 2 : test method for methodes_LOC that should not be successful
 	 */
 	@Test
 	void methodes_LOC_ShouldNotBeSuccessful() {
@@ -78,7 +57,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 3 : test method for methodes_CLOC that should be successful
 	 */
 	@Test
 	void methodes_CLOC_ShouldBeSuccessful() {
@@ -94,7 +73,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 4 : test method for methodes_CLOC that should not be successful
 	 */
 	@Test
 	void methodes_CLOC_ShouldNotBeSuccessful() {
@@ -110,7 +89,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 5 : test method for methodes_DC that should be successful
 	 */
 	@Test
 	void methodes_DC_ShouldBeSuccessful() {
@@ -126,7 +105,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 6 : test method for methodes_DC that should not be successful
 	 */
 	@Test
 	void methodes_DC_ShouldNotBeSuccessful() {
@@ -142,7 +121,7 @@ class CodeAnalyzerTest {
     }
     
     	/***
-	 * Test Method 1 : 
+	 * Test Method 7 : test method for classe_LOC that should be successful
 	 */
 	@Test
 	void classe_LOC_ShouldBeSuccessful() {
@@ -158,7 +137,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 8 : test method for classe_LOC that should not be successful
 	 */
 	@Test
 	void classe_LOC_ShouldNotBeSuccessful() {
@@ -174,7 +153,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 9 : test method for classe_CLOC that should be successful
 	 */
 	@Test
 	void classe_CLOC_ShouldBeSuccessful() {
@@ -190,7 +169,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 10 : test method for classe_CLOC that should not be successful
 	 */
 	@Test
 	void classe_CLOC_ShouldNotBeSuccessful() {
@@ -206,7 +185,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 11 : test method for classe_DC that should be successful
 	 */
 	@Test
 	void classe_DC_ShouldBeSuccessful() {
@@ -222,7 +201,7 @@ class CodeAnalyzerTest {
 	}
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 12 : test method for classe_DC that should not be successful
 	 */
 	@Test
 	void classe_DC_ShouldNotBeSuccessful() {
