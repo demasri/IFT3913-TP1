@@ -116,7 +116,7 @@ public class CodeAnalyzer
      * Produit les files CSV pour sauvegarder la data
      * @param true si on update classes.csv, false si methodes.csv
      */
-    public void produceCSV(boolean isClassReport)
+    public void produceData(boolean isClassReport)
     {
 
         if (isClassReport) //on doit produire le file classes.csv
@@ -127,7 +127,7 @@ public class CodeAnalyzer
                     classe_LOC(this.classes[i]) + "," + classe_CLOC(this.classes[i]) +
                     "," + classe_DC(this.classes[i]) + "\n";
             }
-            this.CSVproducer.updateCSVFile(results, isClassReport);
+            this.produceCSV(results, isClassReport);
         }
         else //production de methodes.csv
         {
@@ -160,10 +160,15 @@ public class CodeAnalyzer
                 lines[i] = results.get(i);
             }
 
-            this.CSVproducer.updateCSVFile(lines, isClassReport);
+            this.produceCSV(lines, isClassReport);
         }
     }
-
+    
+    
+    public void produceCSV(String[] lines, boolean doesFileExist)
+    {
+    	this.CSVproducer.updateCSVFile(lines, doesFileExist);
+    }
 
 
 
