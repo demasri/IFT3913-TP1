@@ -110,8 +110,7 @@ public class CodeAnalyzer
             //methode trouvee
             if (classe[i].contains("METHOD=")) {
                 int startIdx = i+1;
-                while (!(i >= classe.length -1) && 
-                    !(classe[i+1].contains("METHOD="))) 
+                while (!(i >= classe.length -1) && !(classe[i+1].contains("METHOD="))) 
                     ++i;
                 //extraction des lignes de la methode
                 String[] methodLines = new String[i - startIdx];
@@ -167,11 +166,12 @@ public class CodeAnalyzer
     public String[] produceClassesData()
     {
         String[] results = new String[this.classes.length+1];
-        results[0] = "chemin ," + "class ," + "classe_LOC ," + "classe_CLOC ," + "classe_DC" + "\n";
+        results[0] = "chemin ," + "class ," + "classe_LOC ," + "classe_CLOC ," + "classe_DC ," + "WMC ," + "classe_BC \n";
         for (var i=0; i < this.classes.length; i++) {
             results[i+1] = this.absolutePaths[i] + "," + this.classNames[i] + "," +
                 classe_LOC(this.classes[i]) + "," + classe_CLOC(this.classes[i]) +
-                "," + classe_DC(this.classes[i]) + "\n";
+                "," + classe_DC(this.classes[i]) + "," + WMC(this.classes[i]) + "," +
+                classe_BC(this.classes[i]) + "\n";
         }
         return results;
     }
@@ -185,7 +185,7 @@ public class CodeAnalyzer
         //stocke les lignes à produire
         ArrayList<String> results = new ArrayList<String>();
         // Add the title line
-        results.add("chemin ," + "methode ," + "methode_LOC ," + "methode_CLOC ," + "methode_DC" + "\n");
+        results.add("chemin ," + "methode ," + "methode_LOC ," + "methode_CLOC ," + "methode_DC ," + "CC ," + "methode_BC ," + "\n");
         for (var i=0; i < this.classes.length; i++) {
             for (var j=0; j < this.classes[i].length; j++) 
             {
@@ -202,7 +202,8 @@ public class CodeAnalyzer
                     results.add(this.absolutePaths[i] + "," + this.classNames[i] +
                         "," + this.classes[i][startIdx-1].substring(8) + 
                         "," + methode_LOC(methodLines) + "," + methode_CLOC(methodLines) +
-                        "," + methode_DC(methodLines) + "\n");
+                        "," + methode_DC(methodLines) + "," + CC(methodLines) + "," + 
+                        methode_BC(methodLines) + "\n");
                     
                 }
             }
@@ -306,6 +307,70 @@ public class CodeAnalyzer
         int cloc = methode_CLOC(allLines);
         int loc  = methode_LOC(allLines);
         return ((float) cloc / loc);
+    }
+
+    /**
+     * Mesure la complexite cyclomatique de McCabe d'une methode
+     * @param method la methode a analyser
+     * @return sa complexite (int)
+     */
+    public int CC(String[] method) 
+    {
+        int predicats_counter = 0;
+
+        for (var i=0; i < method.length; i++)
+        {
+            String line = method[i];
+            if (line.contains("while") || line.contains("if") || line.contains("else") ||
+               (line.contains("case ") && line.contains(":"))) 
+            {
+                predicats_counter++;
+            }
+        }
+
+        return predicats_counter;
+    }
+
+    /**
+     * Mesure la somme des complexites des methodes d'une classe
+     * @param classe la classe a analyser
+     * @return la somme des complexites de ses methodes (int)
+     */
+    public int WMC(String[] classe) 
+    {
+        String[][] methodsArray = getClassMethods(classe);
+        int complexityCounter = 0;
+
+        for (var i =0; i < methodsArray.length; i++)
+            complexityCounter += CC(methodsArray[i]);
+
+        return complexityCounter;
+    }
+
+    /**
+     * Mesure le degre selon lequel une classe est bien commentee
+     * @param classe
+     * @return
+     */
+    public float classe_BC(String[] classe)
+    {
+        float classe_dc  = classe_DC(classe);
+        int   classe_wmc = WMC(classe);
+
+        return ((float) classe_dc / classe_wmc);
+    }
+
+    /**
+     * Mesure le degre selon lequel une methode est bien commentee
+     * @param method
+     * @return
+     */
+    public float methode_BC(String[] method) 
+    {
+        float methode_dc = methode_DC(method);
+        int   methode_cc = CC(method);
+
+        return ((float) methode_dc / methode_cc);
     }
 
 

@@ -7,5 +7,25 @@ CC(String[] methode):
 	return noeud_predicat + 1
 	
 	
-WMC(String[] class):
+WMC(String[] classe):
+	methodsArray = getClassMethods(classe)
+	complexityCounter = 0
+	for method in methodsArray:
+		complexityCounter += CC(method)
 	
+	return complexityCounter
+	
+	
+classe_BC(String[] classe):
+	classe_dc = classe_DC(classe)
+	classe_WMC = WMC(classe)
+	
+	return classe_dc / classeWMC
+	
+
+methode_BC(String[] method):
+	methode_dc = methode_DC(method)
+  methode_cc  = CC(method)
+	
+	return methode_dc / methode_cc
+		
