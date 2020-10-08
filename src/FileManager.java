@@ -135,17 +135,6 @@ public class FileManager {
         
     }
 
-    public static void main(String[] args) {
-        FileManager test = new FileManager(args[0]);
-        String[][] classes = test.getClassesArray();
-
-        for (var i=0; i < classes.length; i++) {
-            for (var j=0; j < 20; j++) {
-                if(classes[i][j].isEmpty()) System.out.println("empty line");
-                else System.out.println(classes[i][j] + "\n");
-            }
-        }
-    }
 
     
 }

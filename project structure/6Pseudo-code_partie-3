@@ -1,0 +1,11 @@
+COMPLEXITE CYCLOMATIQUE DE MCCABE POUR CHAQUE METHODE (PSEUDO-CODE):
+
+CC(String[] methode):
+	for line in methode:
+		if line contains (while || if || else || case):
+			noeud_predicat++
+	return noeud_predicat + 1
+	
+	
+WMC(String[] class):
+	

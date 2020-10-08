@@ -54,10 +54,8 @@ public class CodeAnalyzer
     }
 
     /**
-     * Renvoie ls index (= no de 'ligne' dans classes) des methodes de chq classe.
-     * On utilise une ArrayList car on ne sait pas a l'avance combien de methodes
-     * une classe va avoir.
-     * @return index des methodes de chaque classe
+     * Cette fonction annote la position des methodes d'une classe directement
+     * dans l'attribut 'classes'
      */
     public void getMethodes()
     {
@@ -84,6 +82,7 @@ public class CodeAnalyzer
                     for (String token : declarationTokens) {
                         //le nom de la methode est colle a la parenthese gauche
                         if (token.contains("(")) name = token.substring(0, token.indexOf("("));
+                        //TODO ADD ARGUMENTS
                     }                    
                     
                     //on ajoute dans l'array de la classe un identificateur (le nom de la methode)
@@ -101,6 +100,31 @@ public class CodeAnalyzer
                 }
             }
         }
+    }
+
+    public String[][] getClassMethods(String[] classe) 
+    {
+        ArrayList<String[]> methods = new ArrayList<>();
+
+        for (var i = 0; i < classe.length; i++) {
+            //methode trouvee
+            if (classe[i].contains("METHOD=")) {
+                int startIdx = i+1;
+                while (!(i >= classe.length -1) && 
+                    !(classe[i+1].contains("METHOD="))) 
+                    ++i;
+                //extraction des lignes de la methode
+                String[] methodLines = new String[i - startIdx];
+                methodLines = Arrays.copyOfRange(classe, startIdx, i+1);
+                methods.add(methodLines);
+            }
+        }
+
+        String[][] result = new String[methods.size()][];
+        for (var i = 0; i < methods.size(); i++) {
+            result[i] = methods.get(i);
+        }
+        return result;
     }
 
     /**
@@ -130,19 +154,19 @@ public class CodeAnalyzer
      * @param lines, the array of information computed
      * @param doesFileExist, the boolean to inform csv manager class which csv file to update
      */
-    public void produceCSV(String[] lines, boolean isClassesOrMethods)
+    public void produceCSV(String[] lines, boolean isClass)
     {
-    	this.CSVproducer.updateCSVFile(lines, isClassesOrMethods);
+    	this.CSVproducer.updateCSVFile(lines, isClass);
     }
     
     /***
-     * This method computes the LOC, CLOC and DC information for all the classes in the specified directory and produces report.
-     * @return results, an array of strings containing the computed information
+     * This method computes the LOC, CLOC and DC information for all the 
+     * classes in the specified directory and produces report.
+     * @return an array of strings containing the computed information
      */
     public String[] produceClassesData()
     {
         String[] results = new String[this.classes.length+1];
-        // Add the title line
         results[0] = "chemin ," + "class ," + "classe_LOC ," + "classe_CLOC ," + "classe_DC" + "\n";
         for (var i=0; i < this.classes.length; i++) {
             results[i+1] = this.absolutePaths[i] + "," + this.classNames[i] + "," +
@@ -191,6 +215,9 @@ public class CodeAnalyzer
 
         return lines;
     }
+
+
+
 
     /**
      * Calcule le nombre de lignes de code non-vides dans une classe
@@ -292,7 +319,6 @@ public class CodeAnalyzer
         try {
 			String folderToAnalyze = args[0];
 			CodeAnalyzer analyzer = new CodeAnalyzer(folderToAnalyze);
-			analyzer.produceData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
