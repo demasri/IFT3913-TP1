@@ -9,6 +9,7 @@ class CSVManagerTest {
 	 * Private Fields
 	 */
 	private CSVManager manager;
+	private CodeAnalyzer analyzer;
 	
 	/***
 	 * Initiation methods pre-testing executions
@@ -16,6 +17,7 @@ class CSVManagerTest {
 	@Before
 	public void initTest()
 	{
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		manager = new CSVManager();
 	}
 	
@@ -25,8 +27,12 @@ class CSVManagerTest {
 	 * Test Method 1 : 
 	 */
 	@Test
-	void updateCSVFile_ShouldBeSuccessful() {
-		fail("Not yet implemented");
+	void updateCSVFile_CreateFileWhenFileExists() {
+		// Arrange
+		
+		// Act
+		
+		// Assert
 	}
 	
 	/***

@@ -267,8 +267,15 @@ public class CodeAnalyzer
 
     public static void main(String[] args) 
     {
-        String folderToAnalyze = args[0];
-        CodeAnalyzer analyzer = new CodeAnalyzer(folderToAnalyze);
+        try {
+        	System.out.println(args[0]);
+			String folderToAnalyze = args[0];
+			CodeAnalyzer analyzer = new CodeAnalyzer(folderToAnalyze);
+			analyzer.produceData(false);
+		} catch (Exception e) {
+			System.err.println("Veuillez Entrer un path en parametre...");
+			e.printStackTrace();
+		}
         
     }
 
