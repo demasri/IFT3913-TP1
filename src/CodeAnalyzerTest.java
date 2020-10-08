@@ -120,7 +120,7 @@ class CodeAnalyzerTest {
 		assertFalse(testDC == expectedDC);
     }
     
-    	/***
+    /***
 	 * Test Method 7 : test method for classe_LOC that should be successful
 	 */
 	@Test
