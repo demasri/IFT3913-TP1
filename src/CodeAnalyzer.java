@@ -332,11 +332,12 @@ public class CodeAnalyzer
     {
         int predicats_counter = 0;
 
+        String line = "";
         for (var i=0; i < method.length; i++)
         {
-            String line = method[i];
+            line = method[i];
             if (line.contains("while") || line.contains("if") || line.contains("else") ||
-               (line.contains("case ") && line.contains(":"))) 
+                line.contains("for") || (line.contains("case ") && line.contains(":"))) 
             {
                 predicats_counter++;
             }
