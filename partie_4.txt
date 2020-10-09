@@ -1,0 +1,18 @@
+Auteur : Daniel El-Masri () ET William Bach ()
+Date : 09 Octobre 2020
+Travail Pratique #1 - IFT3913
+
+Après l'execution du code sur le répertoire jfreechart, on peut ordonner les résultats des fichiers classe.csv et methodes.csv pour trouver les 3 classes et 3 méthodes les moins bien commenté. On peut faire cela en ordonnant la colonne DC (Desité de Commentaire) en ordre croissant. Voici les résultats trouvé :
+
+Les 3 classes les moins bien commenté :
+	1 - PolarPlotTest
+	2 - LegendItemTest
+	3 - CategoryPlotTest
+
+Les 3 méthodes les moins bien commenté :
+	1 - getRendererIndices_DatasetRenderingOrder
+	2 - findDomainAxisIndex_ValueAxis
+	3 - findRageAxisIndex_ValueAxis
+
+Evidemment, une amélioration que nous pouvons proposer serait d'ajouter plus des commentaires pour expliquer les étapes du codes et de la javadoc afin de bien expliquer les buts et inputs/outputs des méthodes. 
+Une autre amélioration que nous pouvons recommender est de réduire le nombres de lignes pour les méthodes et classes afin que la densité des commentaires soit plus élevé. Certaines méthodes peuvent être optimiser pour que ceux-ci nécessite moins de lignes de codes.
