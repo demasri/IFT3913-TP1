@@ -79,12 +79,21 @@ public class CodeAnalyzer
                     //on retrouve le nom de la methode
                     String[] declarationTokens = this.classes[i][j].split(" ");    
                     String name = "";
-                    for (String token : declarationTokens) {
+                    for (String token : declarationTokens) 
                         //le nom de la methode est colle a la parenthese gauche
-                        if (token.contains("(")) name = token.substring(0, token.indexOf("("));
-                        //TODO ADD ARGUMENTS
-                    }                    
-                    
+                        if (token.contains("(")) name = token.trim().substring(0, token.indexOf("("));
+
+                    //on retrouve les types des arguments de la methode
+                    int firstParIdx = this.classes[i][j].indexOf("(");
+                    int sndParIdx   = this.classes[i][j].indexOf(")");
+                    //split le contenu entre parentheses de la declaration
+                    String[] args = this.classes[i][j].substring(firstParIdx+1, sndParIdx).split(",");
+                    for (String arg_i : args) {
+                        //isole les arguments de leur type
+                        String[] typeArg_i = arg_i.split(" ");
+                        name += "_" + typeArg_i[0].trim();
+                    }
+                                          
                     //on ajoute dans l'array de la classe un identificateur (le nom de la methode)
                     //no javadoc
                     if (this.classes[i][j-1].isBlank()) 
