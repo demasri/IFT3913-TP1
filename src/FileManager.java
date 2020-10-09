@@ -35,14 +35,23 @@ public class FileManager {
     {
         //get the .java File objects 
         File[] classes = listFiles(this.path);
-
+        
+//        // Remove the useless files in classes array to keep only the .java files in folder
+//        List<File> classList = new ArrayList<File>();
+//        for(File s : classes) {
+//            if(s != null && s.length() > 0) {
+//               classList.add(s);
+//            }
+//         }
+//        classes = classList.toArray(new File[classList.size()]);
+        
         //store the lines of every file found
         ArrayList<ArrayList<String>> classesArray = new ArrayList<ArrayList<String>>();
         //extract every line of every File
         for (var i=0; i<classes.length; i++) 
         {
             try { 
-                //on utilise le module 'Files' pour extraire les lignes en une seule fois
+            	//on utilise le module 'Files' pour extraire les lignes en une seule fois
                 List<String> allLines = Files.readAllLines(
                     Paths.get(classes[i].getAbsolutePath()));
                 //convert List of lines to ArrayList for convenience
@@ -73,10 +82,11 @@ public class FileManager {
      */
     public String[] getClassNamesArray() 
     {
-        File[] classes = listFiles(this.path);
+        File[] classes = listFiles(this.path); 
+        // Create the classNames array with only the .java files in folder
         String[] classNames = new String[classes.length];
 
-        for (var i=0; i<classes.length; i++)
+        for (var i=0; i<classNames.length; i++)
         {
             classNames[i] = classes[i].getName();
         } 
@@ -91,7 +101,6 @@ public class FileManager {
     public String[] getAbsolutePaths() 
     {
         File[] files = listFiles(this.path);
-
         String[] paths = new String[files.length];
         for (var i=0; i < files.length; i++) {
             paths[i] = files[i].getAbsolutePath();
@@ -131,11 +140,18 @@ public class FileManager {
                 counter++;
             }
         }
+        
+        // Remove the useless files in classes array to keep only the .java files in folder
+        List<File> javaFilesList = new ArrayList<File>();
+        for(File s : javaFiles) {
+            if(s != null && s.length() > 0) {
+               javaFilesList.add(s);
+            }
+         }
+        javaFiles = javaFilesList.toArray(new File[javaFilesList.size()]);
+        
         return javaFiles;
         
-    }
-
-
-    
+    } 
 }
     
