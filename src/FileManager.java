@@ -88,7 +88,7 @@ public class FileManager {
 
         for (var i=0; i<classNames.length; i++)
         {
-            classNames[i] = classes[i].getName();
+            classNames[i] = classes[i].getName().replace(".java", "");
         } 
 
         return classNames;
@@ -110,7 +110,7 @@ public class FileManager {
     }
 
     /**
-     * Searches the folder  
+     * Searches the specified folder  
      * @param startDir folder
      */
     private File[] listFiles(String startDir) 

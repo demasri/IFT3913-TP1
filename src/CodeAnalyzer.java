@@ -91,7 +91,8 @@ public class CodeAnalyzer
                     for (String arg_i : args) {
                         //isole les arguments de leur type
                         String[] typeArg_i = arg_i.split(" ");
-                        name += "_" + typeArg_i[0].trim();
+                        if (!(typeArg_i[0].isBlank()))
+                            name += "_" + typeArg_i[0].trim();
                     }
                                           
                     //on ajoute dans l'array de la classe un identificateur (le nom de la methode)
@@ -194,7 +195,7 @@ public class CodeAnalyzer
         //stocke les lignes à produire
         ArrayList<String> results = new ArrayList<String>();
         // Add the title line
-        results.add("chemin ," + "methode ," + "methode_LOC ," + "methode_CLOC ," + "methode_DC ," + "CC ," + "methode_BC ," + "\n");
+        results.add("chemin ," + "classe ," + "methode ," + "methode_LOC ," + "methode_CLOC ," + "methode_DC ," + "CC ," + "methode_BC ," + "\n");
         for (var i=0; i < this.classes.length; i++) {
             for (var j=0; j < this.classes[i].length; j++) 
             {
@@ -242,7 +243,7 @@ public class CodeAnalyzer
         {
             if (allLines[i].isBlank() || allLines[i].contains("METHOD=")) 
                 continue;
-            else ++counter;
+            else ++counter; 
         }
 
         return counter;
@@ -270,7 +271,7 @@ public class CodeAnalyzer
         for (var i=0; i < allLines.length; i++) 
         {
             if (allLines[i].contains("/*")) {
-                while (!(allLines[i].contains("*/"))) {
+                while (!(allLines[i].contains("*/")) && (i < allLines.length -1)) {
                     ++counter;
                     ++i;
                 }
@@ -303,6 +304,8 @@ public class CodeAnalyzer
     {
         int cloc = classe_CLOC(allLines);
         int loc  = classe_LOC(allLines);
+
+        if (loc == 0) return 0;
         return ((float) cloc / loc);
     }
 
@@ -315,6 +318,8 @@ public class CodeAnalyzer
     {
         int cloc = methode_CLOC(allLines);
         int loc  = methode_LOC(allLines);
+
+        if (loc == 0) return 0;
         return ((float) cloc / loc);
     }
 
@@ -366,6 +371,7 @@ public class CodeAnalyzer
         float classe_dc  = classe_DC(classe);
         int   classe_wmc = WMC(classe);
 
+        if (classe_wmc == 0) return 0;
         return ((float) classe_dc / classe_wmc);
     }
 
@@ -379,6 +385,7 @@ public class CodeAnalyzer
         float methode_dc = methode_DC(method);
         int   methode_cc = CC(method);
 
+        if (methode_cc == 0) return 0;
         return ((float) methode_dc / methode_cc);
     }
 
@@ -392,7 +399,8 @@ public class CodeAnalyzer
     {
         try {
 			String folderToAnalyze = args[0];
-			CodeAnalyzer analyzer = new CodeAnalyzer(folderToAnalyze);
+            CodeAnalyzer analyzer = new CodeAnalyzer(folderToAnalyze);
+            analyzer.produceData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
