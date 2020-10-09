@@ -24,32 +24,81 @@ class CSVManagerTest {
 	// Test Methods
 	
 	/***
-	 * Test Method 1 : 
+	 * Test Method 1 : Successfully update Classes CSV File
 	 */
 	@Test
-	void updateCSVFile_CreateFileWhenFileExists() {
+	void updateCSVFileClasses_ShouldBeSuccessful() 
+	{
 		// Arrange
 		analyzer = new CodeAnalyzer("files_to_analyze");
 		manager = new CSVManager();
+		String[] testData = analyzer.produceClassesData();
 		
-		// Act
-		
-		// Assert
+		try
+		{
+			// Act
+			manager.updateCSVFile(testData, true);
+			
+			// Assert
+			assertTrue(true);
+		}
+		catch(Exception e)
+		{
+			// Assert
+			fail(e);
+		}
 	}
 	
 	/***
-	 * Test Method 2 : 
+	 * Test Method 2 : Successfully update Methods CSV File
 	 */
 	@Test
-	void updateCSVFile_ShouldNotBeSuccessful() {
+	void updateCSVFileMethods_ShouldBeSuccessful() 
+	{
 		// Arrange
 		analyzer = new CodeAnalyzer("files_to_analyze");
 		manager = new CSVManager();
-		// Act
+		String[] testData = analyzer.produceMethodsData();
 		
-		// Assert
+		try
+		{
+			// Act
+			manager.updateCSVFile(testData, false);
+			
+			// Assert
+			assertTrue(true);
+		}
+		catch(Exception e)
+		{
+			// Assert
+			fail(e);
+		}
 	}
 	
-	
+	/***
+	 * Test Method 3 : update Class CSV file with method data
+	 */
+	@Test
+	void updateCSVFileWithWrongData_ShouldBeSuccessful()
+	{
+		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
+		manager = new CSVManager();
+		String[] testData = analyzer.produceMethodsData();
+		
+		try
+		{
+			// Act
+			manager.updateCSVFile(testData, true);
+			
+			// Assert
+			assertTrue(true);
+		}
+		catch(Exception e)
+		{
+			// Assert 
+			fail(e);
+		}
+	}
 
 }

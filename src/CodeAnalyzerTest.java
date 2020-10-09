@@ -7,8 +7,7 @@ class CodeAnalyzerTest {
 	/***
 	 * Private Fields
 	 */
-	public static CodeAnalyzer analyzer;
-	public static boolean isInit = false;
+	private CodeAnalyzer analyzer;
 	
 
 	// Test Methods:
@@ -71,7 +70,6 @@ class CodeAnalyzerTest {
 	@Test
 	void methodes_CLOC_ShouldNotBeSuccessful() {
 		// Arrange
-		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testMethod = Arrays.copyOfRange(analyzer.classes[0], 1, 1);
 		int expectedCLOC = 30;
 		

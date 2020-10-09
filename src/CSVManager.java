@@ -19,8 +19,15 @@ public class CSVManager {
     {
         //recuperation du chemin du fichier csv
         String PATH;
-        if (isClassReport) PATH = this.PATH_classes;
-        else               PATH = this.PATH_methods;
+        
+        if (isClassReport)
+        {
+        	PATH = this.PATH_classes;
+        }
+        else
+        {
+        	PATH = this.PATH_methods;
+        }
 
         try {
             FileWriter csvWriter = new FileWriter(PATH, false);
