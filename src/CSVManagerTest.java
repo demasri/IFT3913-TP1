@@ -29,6 +29,8 @@ class CSVManagerTest {
 	@Test
 	void updateCSVFile_CreateFileWhenFileExists() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
+		manager = new CSVManager();
 		
 		// Act
 		
@@ -40,7 +42,12 @@ class CSVManagerTest {
 	 */
 	@Test
 	void updateCSVFile_ShouldNotBeSuccessful() {
-		fail("Not yet implemented");
+		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
+		manager = new CSVManager();
+		// Act
+		
+		// Assert
 	}
 	
 	

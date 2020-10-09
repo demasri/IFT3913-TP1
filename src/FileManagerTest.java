@@ -26,6 +26,7 @@ class FileManagerTest {
 	void getClassesArray_ShouldBeSuccessful() 
 	{
 		// Arrange
+		manager = new FileManager("files_to_analyze");
 		int expectedNumberOfClasses =  9;
 		
 		// Act
@@ -42,6 +43,7 @@ class FileManagerTest {
 	void getClassesArray_ShouldNotBeSuccessful() 
 	{
 		// Arrange
+		manager = new FileManager("files_to_analyze");
 		int expectedNumberOfClasses =  5;
 		
 		// Act
@@ -58,6 +60,7 @@ class FileManagerTest {
 	void getClassNamesArray_ShouldBeSuccessful() 
 	{
 		// Arrange
+		manager = new FileManager("files_to_analyze");
 		String[] expectedClassNameArray = {"CodeAnalyzer.java", "Member.java", "DataBase.java", "Interface.java", "personne.java", "Rapport.java", "Service.java", "Tests.java", "Vues.java"};
 		
 		// Act
@@ -74,6 +77,7 @@ class FileManagerTest {
 	void getClassNamesArray_ShouldNotBeSuccessful() 
 	{
 		// Arrange
+		manager = new FileManager("files_to_analyze");
 		String[] expectedClassNameArray = {"DataBase.java", "Interface.java", "personne.java", "Rapport.java", "Service.java", "Tests.java", "Vues.java"};
 		
 		// Act

@@ -1,8 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Arrays;
-
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 class CodeAnalyzerTest {
@@ -10,16 +7,9 @@ class CodeAnalyzerTest {
 	/***
 	 * Private Fields
 	 */
-	private CodeAnalyzer analyzer;
+	public static CodeAnalyzer analyzer;
+	public static boolean isInit = false;
 	
-	/***
-	 * Initiation Method before Test Execution
-	 */
-	@Before
-	public void initTest()
-	{
-		analyzer = new CodeAnalyzer("files_to_analyze");
-	}
 
 	// Test Methods:
 	
@@ -30,6 +20,7 @@ class CodeAnalyzerTest {
 	@Test
 	void methodes_LOC_ShouldBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testMethod = Arrays.copyOfRange(analyzer.classes[0], 1, 1);
 		int expectedLOC = 33;
 		
@@ -46,6 +37,7 @@ class CodeAnalyzerTest {
 	@Test
 	void methodes_LOC_ShouldNotBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testMethod = Arrays.copyOfRange(analyzer.classes[0], 1, 1);
 		int expectedLOC = 30;
 		
@@ -62,6 +54,7 @@ class CodeAnalyzerTest {
 	@Test
 	void methodes_CLOC_ShouldBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testMethod = Arrays.copyOfRange(analyzer.classes[0], 1, 1);
 		int expectedCLOC = 12;
 		
@@ -78,6 +71,7 @@ class CodeAnalyzerTest {
 	@Test
 	void methodes_CLOC_ShouldNotBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testMethod = Arrays.copyOfRange(analyzer.classes[0], 1, 1);
 		int expectedCLOC = 30;
 		
@@ -94,6 +88,7 @@ class CodeAnalyzerTest {
 	@Test
 	void methodes_DC_ShouldBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testMethod = Arrays.copyOfRange(analyzer.classes[0], 1, 1);
 		double expectedDC = 0.36363637;
 		
@@ -110,6 +105,7 @@ class CodeAnalyzerTest {
 	@Test
 	void methodes_DC_ShouldNotBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testMethod = Arrays.copyOfRange(analyzer.classes[0], 1, 1);
 		double expectedDC = 0.30;
 		
@@ -126,6 +122,7 @@ class CodeAnalyzerTest {
 	@Test
 	void classe_LOC_ShouldBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testClass = analyzer.classes[0];
 		int expectedLOC = 181;
 		
@@ -142,6 +139,7 @@ class CodeAnalyzerTest {
 	@Test
 	void classe_LOC_ShouldNotBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testClass = analyzer.classes[0];
 		int expectedLOC = 70;
 		
@@ -158,6 +156,7 @@ class CodeAnalyzerTest {
 	@Test
 	void classe_CLOC_ShouldBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testClass = analyzer.classes[0];
 		int expectedCLOC = 78;
 		
@@ -174,6 +173,7 @@ class CodeAnalyzerTest {
 	@Test
 	void classe_CLOC_ShouldNotBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testClass = analyzer.classes[0];
 		int expectedCLOC = 70;
 		
@@ -190,6 +190,7 @@ class CodeAnalyzerTest {
 	@Test
 	void classe_DC_ShouldBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testClass = analyzer.classes[0];
 		double expectedDC = 0.43093923;
 		
@@ -206,6 +207,7 @@ class CodeAnalyzerTest {
 	@Test
 	void classe_DC_ShouldNotBeSuccessful() {
 		// Arrange
+		analyzer = new CodeAnalyzer("files_to_analyze");
 		String[] testClass = analyzer.classes[0];
 		double expectedDC = 0.4309123;
 		
