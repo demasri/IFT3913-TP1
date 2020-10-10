@@ -6,7 +6,7 @@ UTILISATION DU LOGICIEL:
 - Sur terminal, faire:
 
 javac CodeAnalyzer.java 
-java CodeAnalyzer <chemin absolu du folder contenant le projet Java>
+java CodeAnalyzer <chemin du folder contenant le projet Java>
 
 - Pour les resultats, aller dans src/CSV.
 
