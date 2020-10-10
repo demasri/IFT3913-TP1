@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 public class CSVManager {
     private String PATH_classes = "CSV/classes.csv";
     private String PATH_methods = "CSV/methods.csv";
+    private String DIRECTORY_PATH = "CSV";
 
     /**
      * Remplit les fichiers CSV avec l'information fournie 
@@ -20,6 +22,7 @@ public class CSVManager {
         //recuperation du chemin du fichier csv
         String PATH;
         
+        // selection du fichier dans lequel on ecrit
         if (isClassReport)
         {
         	PATH = this.PATH_classes;
@@ -29,19 +32,94 @@ public class CSVManager {
         	PATH = this.PATH_methods;
         }
 
-        try {
-            FileWriter csvWriter = new FileWriter(PATH, false);
-            int i = 0;
-            while (i < lines.length) {
-                csvWriter.append(lines[i]);
-                csvWriter.flush();
-                i++;
-            }
-            csvWriter.close();
+        File csvFile = new File(PATH);
+        
+        // If parent directory and file already exists
+        if(csvFile.exists())
+        {
+            try {
+                FileWriter csvWriter = new FileWriter(PATH, false);
+                int i = 0;
+                while (i < lines.length) {
+                    csvWriter.append(lines[i]);
+                    csvWriter.flush();
+                    i++;
+                }
+                csvWriter.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Something went wrong. Can't update CSV files.");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Something went wrong. Can't update CSV files.");
+            }
         }
+        else
+        {
+        	File parentDirectory = new File(DIRECTORY_PATH);
+      
+        	// If parent directory exists but not csv file
+        	if(parentDirectory.exists())
+        	{
+            	try {
+            		// Create the file if the file doesnt exist
+    				csvFile.createNewFile();
+    				
+    		        try {
+    		            FileWriter csvWriter = new FileWriter(PATH, false);
+    		            int i = 0;
+    		            while (i < lines.length) {
+    		                csvWriter.append(lines[i]);
+    		                csvWriter.flush();
+    		                i++;
+    		            }
+    		            csvWriter.close();
+
+    		        } catch (IOException e) {
+    		            e.printStackTrace();
+    		            System.out.println("Something went wrong. Can't update CSV files.");
+    		        }
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			}
+        	}
+        	// If the parent directory and the csv file dont exist
+        	else
+        	{
+        		// Creates the parent directory
+        		parentDirectory.mkdir();
+        		
+            	try {
+            		// Create the file if the file doesnt exist
+    				csvFile.createNewFile();
+    				
+    		        try {
+    		            FileWriter csvWriter = new FileWriter(PATH, false);
+    		            int i = 0;
+    		            while (i < lines.length) {
+    		                csvWriter.append(lines[i]);
+    		                csvWriter.flush();
+    		                i++;
+    		            }
+    		            csvWriter.close();
+
+    		        } catch (IOException e) {
+    		            e.printStackTrace();
+    		            System.out.println("Something went wrong. Can't update CSV files.");
+    		        }
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			}
+        	}
+
+        	
+        }
+    }
+    
+    /***
+     * Private Methods
+     */
+    
+    private void createDirectory()
+    {
+    	
     }
 }
